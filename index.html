@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#F4E6DF">
+  <meta name="theme-color" content="#E8EFE4">
   <title>Kishore & Abbrinna | Wedding Invitation</title>
   <meta name="description" content="R. Kishore & M. Abbrinna invite you to their wedding on Sunday, 22 November 2026 at AKA Kalyana Mandapam, Trichy Road, Coimbatore.">
 
@@ -15,7 +15,7 @@
 
   <link rel="preload" href="assets/fonts/playfair-display-latin-500-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/crimson-pro-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
 
@@ -204,7 +204,7 @@
 
   <!-- 8. RSVP over WhatsApp -->
   <section class="scene s-rsvp" id="rsvp">
-    <h3 class="heading reveal"><span class="en">Will you join us?</span><span class="ta">தங்கள் வருகையைத் தெரிவியுங்கள்</span></h3>
+    <h3 class="heading reveal"><span class="en">Confirm your presence</span><span class="ta">தங்கள் வருகையைத் தெரிவியுங்கள்</span></h3>
     <form class="rsvp reveal" id="rsvpForm" novalidate>
       <label class="field">
         <span class="field__label"><span class="en">Your name</span><span class="ta">உங்கள் பெயர்</span></span>
@@ -219,7 +219,10 @@
         </div>
       </fieldset>
       <div class="field field--row">
-        <span class="field__label" id="guestsLabel"><span class="en">Guests</span><span class="ta">நபர்கள்</span></span>
+        <span class="field__label" id="guestsLabel">
+          <span class="en">How many of you are coming?</span><span class="ta">எத்தனை பேர் வருகிறீர்கள்?</span>
+          <small class="field__hint"><span class="en">Including yourself</span><span class="ta">உங்களையும் சேர்த்து</span></small>
+        </span>
         <div class="stepper" role="group" aria-labelledby="guestsLabel">
           <button type="button" data-step="-1" aria-label="Fewer guests">−</button>
           <output name="guests" id="guests">2</output>
@@ -247,7 +250,7 @@
       <p class="close__lead reveal">தங்கள் அன்புள்ள</p>
       <p class="close__from reveal">திரு. R. ரவி<br>தெய்வத்திருமதி. R. கோமளா<br>செல்வன். R. சற்குரு <small>B.E.,</small><br>கோவை.</p>
     </div>
-    <a class="btn reveal" href="tel:+919092605807"><span class="en">Call 90926 05807</span><span class="ta">அழைக்க 90926 05807</span></a>
+    <a class="btn reveal" href="tel:+917010933178"><span class="en">Call 70109 33178</span><span class="ta">அழைக்க 70109 33178</span></a>
     <p class="close__sign wipe">Kishore <span class="amp">&amp;</span> Abbrinna</p>
     <p class="close__date reveal">22 . 11 . 2026</p>
   </section>
@@ -258,8 +261,8 @@
 <script src="js/vendor/ScrollTrigger.min.js"></script>
 <script src="js/vendor/DrawSVGPlugin.min.js"></script>
 <script src="js/vendor/lenis.min.js"></script>
-<script src="js/monogram.js"></script>
-<script src="js/art.js"></script>
-<script src="js/main.js"></script>
+<script src="js/monogram.js?v=3"></script>
+<script src="js/art.js?v=3"></script>
+<script src="js/main.js?v=3"></script>
 </body>
 </html>

@@ -209,7 +209,7 @@
       id: 'monoFoil', gradientUnits: 'userSpaceOnUse', x1: 130, y1: 70, x2: 790, y2: 870,
       gradientTransform: 'translate(-760 0)'
     }, defs);
-    [[0, 'var(--gold)'], [0.44, 'var(--gold)'], [0.5, '#F3DDA8'], [0.56, 'var(--gold)'], [1, 'var(--gold)']]
+    [[0, 'var(--gold)'], [0.44, 'var(--gold)'], [0.5, '#B2C5AA'], [0.56, 'var(--gold)'], [1, 'var(--gold)']]
       .forEach(([o, c]) => E('stop', { offset: o, style: `stop-color:${c}` }, foil));
 
     const pen = {};

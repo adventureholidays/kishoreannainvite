@@ -45,6 +45,6 @@ Share `your-link/?lang=ta` and the site opens straight in Tamil. Guests can also
 ## Editing details
 
 - Text: search for it in `index.html`. English sits in `class="en"`, Tamil in `class="ta"`.
-- RSVP WhatsApp number: `WHATSAPP` in `js/main.js` (now 919092605807).
+- RSVP WhatsApp number: `WHATSAPP` in `js/main.js` (now 917010933178); the Call button in `index.html` uses the same number.
 - Countdown time: `target` in `js/main.js` (now 22 Nov 2026, 10.00 am IST).
 - Colours: the `:root` block at the top of `css/style.css`.

@@ -112,7 +112,7 @@
       .to('.thoranam--gate', { yPercent: -130, duration: 0.9, ease: 'power2.in' }, 0.35)
       .to('.door--l', { rotationY: 105, duration: 1.7, ease: 'power3.inOut' }, 0.5)
       .to('.door--r', { rotationY: -105, duration: 1.7, ease: 'power3.inOut' }, 0.5)
-      .to(gate, { backgroundColor: 'rgba(227,202,189,0)', duration: 1.2 }, 0.6)
+      .to(gate, { backgroundColor: 'rgba(221,231,216,0)', duration: 1.2 }, 0.6)
       .add(heroIntro(), 1.15)
       .call(unlock, null, 2.2);
   }
@@ -242,7 +242,7 @@
   if (tick()) { const id = setInterval(() => { if (!tick()) clearInterval(id); }, 1000); }
 
   /* ---------- RSVP → WhatsApp ---------- */
-  const WHATSAPP = '919092605807';
+  const WHATSAPP = '917010933178';
   const form = $('#rsvpForm'), guestsOut = $('#guests'), err = $('#formError');
   let guests = 2;
   form.addEventListener('click', e => {
@@ -263,8 +263,12 @@
       ta: { both: 'வரவேற்பு & திருமணம்', reception: 'வரவேற்பு (21.11.2026)', wedding: 'திருமணம் (22.11.2026)' }
     }[lang][ev];
     const msg = lang === 'ta'
-      ? `வணக்கம்! கிஷோர் & அப்ரின்னா திருமணத்திற்கு வருகை உறுதி.\nபெயர்: ${name}\nகலந்து கொள்வது: ${label}\nநபர்கள்: ${guests}` + (wish ? `\nவாழ்த்து: ${wish}` : '')
-      : `Hello! RSVP for Kishore & Abbrinna's wedding.\nName: ${name}\nAttending: ${label}\nGuests: ${guests}` + (wish ? `\nWishes: ${wish}` : '');
+      ? `வணக்கம் 🙏\nகிஷோர் & அப்ரின்னா திருமணத்தில் கலந்து கொள்வதை மகிழ்ச்சியுடன் உறுதி செய்கிறேன்.\n\n`
+        + `பெயர்: ${name}\nகலந்து கொள்வது: ${label}\nவருகை தரும் நபர்கள்: ${guests} (என்னையும் சேர்த்து)`
+        + (wish ? `\n\nவாழ்த்து: ${wish}` : '') + `\n\nவிழாவில் சந்திப்போம்!`
+      : `Hello 🙏\nHappy to confirm that we will be joining Kishore & Abbrinna's wedding celebrations.\n\n`
+        + `Name: ${name}\nAttending: ${label}\nNo. of members: ${guests} (including me)`
+        + (wish ? `\n\nWishes for the couple: ${wish}` : '') + `\n\nSee you there!`;
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
   });
 })();

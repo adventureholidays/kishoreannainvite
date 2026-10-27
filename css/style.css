@@ -1,6 +1,6 @@
 /* =========================================================
    Kishore & Abbrinna | Wedding invitation
-   Blush paper, gold line-art, magenta from the printed card
+   Mint paper, avocado line-art, emerald and evergreen ink
    ========================================================= */
 
 @font-face { font-family: "Playfair Display"; font-style: italic; font-weight: 500; src: url(../assets/fonts/playfair-display-latin-500-italic.woff2) format("woff2"); font-display: swap; }
@@ -18,16 +18,16 @@
 @font-face { font-family: "Noto Serif Tamil"; font-weight: 600; src: url(../assets/fonts/noto-serif-tamil-tamil-600-normal.woff2) format("woff2"); font-display: swap; }
 
 :root {
-  --paper: #F4E6DF;      /* blush card stock */
-  --paper-deep: #EAD4C9; /* door / shadowed paper */
-  --gold: #A07A33;       /* line-art gold */
-  --gold-soft: #C9A560;
-  --ink: #4A2E27;        /* cocoa text */
-  --ink-soft: #7B5B51;
-  --rose: #A81D5A;       /* magenta from the printed card */
-  --wax: #8A1B46;
-  --sage: #9AA582;
-  --marigold: #D78F2B;
+  --paper: #E8EFE4;      /* pale tint of the palette mint (#B2C5AA) */
+  --paper-deep: #DDE7D8; /* doors: a touch deeper tint of the mint */
+  --gold: #5B7F20;       /* avocado line-art */
+  --gold-soft: #86A965;  /* celadon */
+  --ink: #01261E;        /* evergreen text */
+  --ink-soft: #264E12;   /* jade */
+  --rose: #03351C;       /* emerald accent */
+  --wax: #012F1F;        /* pine */
+  --sage: #73943D;       /* pistachio */
+  --marigold: #86A965;   /* celadon */
 
   --col: min(100vw, 440px);
   --gutter: 38px;
@@ -79,7 +79,7 @@ svg .thin  { stroke-width: .8; opacity: .8; }
 .gate {
   position: fixed; inset: 0; z-index: 50;
   display: grid; place-items: center;
-  background: #E3CABD;
+  background: #DDE7D8;
   perspective: 1400px;
 }
 .gate__stage {
@@ -90,31 +90,31 @@ svg .thin  { stroke-width: .8; opacity: .8; }
 .door {
   position: absolute; top: 0; bottom: 0; width: 50%;
   background:
-    linear-gradient(90deg, rgba(255,255,255,.0) 70%, rgba(150,95,80,.10) 100%),
+    linear-gradient(90deg, rgba(1,38,30,0) 70%, rgba(1,38,30,.10) 100%),
     var(--paper-deep);
   overflow: hidden;
   backface-visibility: hidden;
   will-change: transform;
 }
-.door--l { left: 0;  transform-origin: 0 50%; box-shadow: inset -1px 0 0 rgba(120,70,55,.25); }
+.door--l { left: 0;  transform-origin: 0 50%; box-shadow: inset -1px 0 0 rgba(1,38,30,.25); }
 .door--r { right: 0; transform-origin: 100% 50%; transform: scaleX(1); }
 .door--r .door__panel { transform: scaleX(-1); }
 .door__panel {
   position: absolute; inset: 22px 0 22px 18px;
-  border: 1px solid rgba(160,122,51,.45);
+  border: 1px solid rgba(91,127,32,.45);
   border-right: 0;
   border-radius: 100% 0 0 0 / 26% 0 0 0;
 }
 .door__panel::before {
   content: ""; position: absolute; inset: 6px 0 6px 6px;
-  border: 1px solid rgba(160,122,51,.3); border-right: 0;
+  border: 1px solid rgba(91,127,32,.3); border-right: 0;
   border-radius: inherit;
 }
 .door__art {
   position: absolute; inset: 0; width: 100%; height: 100%;
-  filter: drop-shadow(1px 1px 0 rgba(255,255,255,.75)) drop-shadow(-.6px -.6px 0 rgba(120,70,55,.22));
+  filter: drop-shadow(-.6px -.6px 0 rgba(1,38,30,.22));
 }
-.door__art .ln, .door__art .pt, .door__art .lf { stroke: #C8A99B; }
+.door__art .ln, .door__art .pt, .door__art .lf { stroke: #86A965; }
 .door__art .pt, .door__art .lf { fill: var(--paper-deep); }
 
 /* wax seal: one circle split across the seam, half on each door */
@@ -122,16 +122,16 @@ svg .thin  { stroke-width: .8; opacity: .8; }
   position: absolute; top: 50%; width: 112px; height: 112px; margin-top: -56px;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 38% 32%, rgba(255,255,255,.28), transparent 42%),
-    radial-gradient(circle at 50% 50%, #A2275A 0 52%, var(--wax) 53% 64%, #6E1236 65% 100%);
-  box-shadow: 0 6px 14px rgba(90,20,45,.35), inset 0 -4px 8px rgba(0,0,0,.25);
+    radial-gradient(circle at 38% 32%, rgba(178,197,170,.3), transparent 42%),
+    radial-gradient(circle at 50% 50%, #103B17 0 52%, var(--wax) 53% 64%, #01261E 65% 100%);
+  box-shadow: 0 6px 14px rgba(1,38,30,.35), inset 0 -4px 8px rgba(1,38,30,.5);
   display: grid; place-items: center;
 }
 .seal--l { right: -56px; }
 .seal--r { left: -56px; }
 .seal__mark {
-  width: 72px; height: 88px; overflow: visible; fill: #F2C9A2;
-  filter: drop-shadow(0 1px 0 rgba(0,0,0,.35)) drop-shadow(0 -1px 0 rgba(255,255,255,.15));
+  width: 72px; height: 88px; overflow: visible; fill: #E8EFE4;
+  filter: drop-shadow(0 1px 0 rgba(1,38,30,.6));
 }
 .seal-btn {
   position: absolute; top: 50%; left: 50%; width: 132px; height: 132px; margin: -66px 0 0 -66px;
@@ -140,17 +140,17 @@ svg .thin  { stroke-width: .8; opacity: .8; }
 }
 .seal-btn::after { /* soft pulse ring inviting a tap */
   content: ""; position: absolute; inset: 4px; border-radius: 50%;
-  border: 1px solid rgba(160,122,51,.6);
+  border: 1px solid rgba(91,127,32,.6);
   animation: pulse 2.4s ease-out infinite;
 }
 @keyframes pulse { 0% { transform: scale(.92); opacity: .9; } 100% { transform: scale(1.35); opacity: 0; } }
 
 .thoranam { display: block; width: 100%; }
 .thoranam--gate { position: absolute; top: 0; left: 0; z-index: 2; }
-.thoranam .mango__leaf { fill: #DCE0C8; stroke: #8E9A70; }
-.thoranam .mango .vein { stroke: #8E9A70; }
+.thoranam .mango__leaf { fill: #73943D; stroke: #264E12; }
+.thoranam .mango .vein { stroke: #264E12; }
 .thoranam .mari__ball { fill: var(--marigold); }
-.thoranam .mari__core { fill: #B8661E; }
+.thoranam .mari__core { fill: #5B7F20; }
 .thoranam .rope { stroke-width: 1.4; }
 
 .gate__hint {
@@ -169,11 +169,11 @@ html[data-lang="ta"] .gate__hint { font-style: normal; font-size: 14px; }
   border: 1px solid var(--gold);
   border-radius: 50% 50% 18px 18px / 150px 150px 18px 18px;
   /* the huge shadow is the paper outside the arch; content scrolls "behind" it */
-  box-shadow: 0 0 0 100vmax var(--paper), inset 0 0 28px rgba(140,80,60,.10);
+  box-shadow: 0 0 0 100vmax var(--paper), inset 0 0 28px rgba(1,38,30,.10);
 }
 .arch__inner {
   position: absolute; inset: 5px;
-  border: 1px solid rgba(160,122,51,.55);
+  border: 1px solid rgba(91,127,32,.55);
   border-radius: 50% 50% 14px 14px / 145px 145px 14px 14px;
 }
 .arch__crown { position: absolute; top: 0; left: 50%; width: 80px; height: 46px; margin-left: -40px; overflow: visible; }
@@ -193,8 +193,8 @@ html[data-lang="ta"] .gate__hint { font-style: normal; font-size: 14px; }
 }
 .pill {
   min-width: 44px; height: 36px; padding: 0 14px;
-  border-radius: 18px; border: 1px solid rgba(160,122,51,.55);
-  background: rgba(244,230,223,.85); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  border-radius: 18px; border: 1px solid rgba(91,127,32,.55);
+  background: rgba(232,239,228,.85); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
   font-family: var(--tamil); font-size: 13px; color: var(--ink); cursor: pointer;
 }
 html[data-lang="ta"] #langBtn { font-family: var(--serif); font-size: 15px; font-style: italic; }
@@ -357,7 +357,7 @@ html[data-lang="ta"] .venue__addr { font-style: normal; font-size: 14px; }
   font-family: var(--display); font-weight: 600; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; cursor: pointer;
 }
 html[data-lang="ta"] .btn { font-family: var(--tamil); font-size: 14px; letter-spacing: 0; }
-.btn--solid { background: var(--rose); border-color: var(--rose); color: #FBEFF2; width: 100%; }
+.btn--solid { background: var(--rose); border-color: var(--rose); color: #E8EFE4; width: 100%; }
 .btn:active { transform: translateY(1px); }
 
 /* 8. rsvp */
@@ -366,23 +366,24 @@ html[data-lang="ta"] .btn { font-family: var(--tamil); font-size: 14px; letter-s
 .field__label { font-size: 16px; font-style: italic; color: var(--ink-soft); padding: 0; }
 html[data-lang="ta"] .field__label { font-style: normal; font-size: 13px; }
 .field input[type="text"], .field textarea {
-  width: 100%; padding: 10px 2px; border: 0; border-bottom: 1px solid rgba(160,122,51,.6);
+  width: 100%; padding: 10px 2px; border: 0; border-bottom: 1px solid rgba(91,127,32,.6);
   background: transparent; font: inherit; font-size: 19px; color: var(--ink); border-radius: 0; resize: vertical;
 }
 .field input[type="text"]:focus, .field textarea:focus { outline: none; border-bottom-color: var(--rose); box-shadow: 0 1px 0 var(--rose); }
-.field--row { flex-direction: row; align-items: center; justify-content: space-between; }
+.field--row { flex-direction: row; align-items: center; justify-content: space-between; gap: 12px; }
+.field__hint { display: block; font-size: 12px; font-style: normal; opacity: .75; margin-top: 2px; }
 .chips { display: flex; gap: 8px; flex-wrap: wrap; }
 .chip input { position: absolute; opacity: 0; pointer-events: none; }
 .chip > span {
-  display: inline-block; padding: 8px 16px; border-radius: 20px; border: 1px solid rgba(160,122,51,.55);
+  display: inline-block; padding: 8px 16px; border-radius: 20px; border: 1px solid rgba(91,127,32,.55);
   font-size: 16px; cursor: pointer;
 }
 html[data-lang="ta"] .chip > span { font-size: 13px; }
-.chip input:checked + span { background: var(--rose); border-color: var(--rose); color: #FBEFF2; }
+.chip input:checked + span { background: var(--rose); border-color: var(--rose); color: #E8EFE4; }
 .chip input:focus-visible + span { outline: 2px solid var(--rose); outline-offset: 2px; }
 .stepper { display: flex; align-items: center; gap: 4px; }
 .stepper button {
-  width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(160,122,51,.55);
+  width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(91,127,32,.55);
   background: transparent; font-size: 20px; line-height: 1; cursor: pointer;
 }
 .stepper output { min-width: 34px; text-align: center; font-family: var(--display); font-weight: 700; font-size: 18px; color: var(--rose); }
@@ -407,8 +408,8 @@ html[data-lang="ta"] .close__from { font-size: 16px; line-height: 1.9; }
 
 /* desktop: keep it a phone-sized card */
 @media (min-width: 700px) {
-  body { background: #E8D2C6; }
-  .arch { box-shadow: 0 0 0 100vmax var(--paper), inset 0 0 28px rgba(140,80,60,.10); }
+  body { background: #B2C5AA; }
+  .arch { box-shadow: 0 0 0 100vmax var(--paper), inset 0 0 28px rgba(1,38,30,.10); }
 }
 
 /* reduced motion: no pulse, no drip, no flicker */
