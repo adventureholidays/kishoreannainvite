@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F4E6DF">
+  <title>Kishore & Abbrinna | Wedding Invitation</title>
+  <meta name="description" content="R. Kishore & M. Abbrinna invite you to their wedding on Sunday, 22 November 2026 at AKA Kalyana Mandapam, Trichy Road, Coimbatore.">
+
+  <!-- WhatsApp / social preview. After hosting, replace og:image with the full https:// link -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Kishore & Abbrinna | Wedding Invitation">
+  <meta property="og:description" content="Sunday, 22 November 2026, 10.00 am – 11.00 am | AKA Kalyana Mandapam, Coimbatore">
+  <meta property="og:image" content="assets/og-image.jpg">
+
+  <link rel="preload" href="assets/fonts/playfair-display-latin-500-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/crimson-pro-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ GATE: the closed card ============ -->
+<div id="gate" class="gate" role="dialog" aria-label="Wedding invitation of Kishore and Abbrinna">
+  <div class="gate__stage">
+    <div class="door door--l">
+      <div class="door__panel"><svg class="door__art" data-art="door" viewBox="0 0 200 520" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"></svg></div>
+      <div class="seal seal--l" aria-hidden="true"><svg class="seal__mark" data-art="seal" viewBox="130 70 660 800"></svg></div>
+    </div>
+    <div class="door door--r">
+      <div class="door__panel"><svg class="door__art" data-art="door" viewBox="0 0 200 520" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"></svg></div>
+      <div class="seal seal--r" aria-hidden="true"><svg class="seal__mark" data-art="seal" viewBox="130 70 660 800"></svg></div>
+    </div>
+    <svg class="thoranam thoranam--gate" data-art="thoranam" viewBox="0 0 400 90" preserveAspectRatio="xMidYMin meet" aria-hidden="true"></svg>
+    <button class="seal-btn" id="openBtn" type="button">
+      <span class="sr-only">Open the invitation</span>
+    </button>
+    <p class="gate__hint">
+      <span class="en">Tap the seal to open</span>
+      <span class="ta">திறக்க முத்திரையைத் தொடவும்</span>
+    </p>
+  </div>
+</div>
+
+<!-- ============ FIXED CHROME: arch window + corner blooms ============ -->
+<div class="chrome" aria-hidden="true">
+  <div class="arch"><div class="arch__inner"></div></div>
+  <svg class="arch__crown" data-art="crown" viewBox="0 0 80 46"></svg>
+  <svg class="bloom bloom--tl" data-art="bloom" viewBox="0 0 220 220"></svg>
+  <svg class="bloom bloom--br" data-art="bloom" viewBox="0 0 220 220"></svg>
+</div>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="controls">
+  <button id="langBtn" class="pill" type="button" aria-label="Switch language">தமிழ்</button>
+  <button id="musicBtn" class="pill pill--icon" type="button" aria-label="Play music" aria-pressed="false" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg>
+  </button>
+</div>
+<audio id="bgm" src="assets/audio/music.mp3" loop preload="metadata"></audio>
+
+<!-- ============ THE INVITATION ============ -->
+<main id="invite">
+
+  <!-- 1. Blessing -->
+  <section class="scene s-bless" id="bless">
+    <div class="pillaiyar" lang="ta">உ</div>
+    <p class="thunai">
+      <span class="en">Sree Vinayagar Thunai</span><span class="en">Sree Kali Thunai</span>
+      <span class="ta">ஸ்ரீ விநாயகர் துணை</span><span class="ta">ஸ்ரீ காளி துணை</span>
+    </p>
+    <p class="tagline en">The beginning of forever</p>
+    <h1 class="title">
+      <span class="en">Wedding Invitation</span>
+      <span class="ta">திருமண அழைப்பிதழ்</span>
+    </h1>
+    <svg class="rule" data-art="rule" viewBox="0 0 240 20" aria-hidden="true"></svg>
+    <blockquote class="kural">
+      <p lang="ta">அன்பும் அறனும் உடைத்தாயின் இல்வாழ்க்கை<br>பண்பும் பயனும் அது</p>
+      <footer class="en">If home life has love and virtue, that is its grace and its reward. <cite>Thirukkural 45</cite></footer>
+      <footer class="ta"><cite>திருக்குறள் 45</cite></footer>
+    </blockquote>
+    <div class="scroll-cue" aria-hidden="true">
+      <span class="en">Scroll</span><span class="ta">கீழே நகர்த்தவும்</span>
+      <i></i>
+    </div>
+  </section>
+
+  <!-- 2. Monogram (pinned, scroll-scrubbed) -->
+  <section class="scene s-mono" id="mono">
+    <svg class="mono" id="monoSvg" viewBox="130 70 660 800" aria-label="A and K monogram" role="img"></svg>
+    <p class="mono__cap">
+      <span class="en">Kishore &amp; Abbrinna</span>
+      <span class="ta">கிஷோர் &amp; அப்ரின்னா</span>
+    </p>
+  </section>
+
+  <!-- 3. The invitation text + names -->
+  <section class="scene s-names" id="names">
+
+    <!-- English -->
+    <div class="en">
+      <p class="lead reveal">With immense joy and profound gratitude</p>
+      <p class="hosts reveal">Mr. R. Ravi &amp; Mrs. R. Komala <span class="late">(Late)</span>, Coimbatore</p>
+      <p class="body reveal">Under divine blessings from God and the affectionate blessings from our elders, we are delighted to invite you and your family to grace the sacred wedding ceremony of our son</p>
+      <h2 class="name wipe">R. Kishore <small>B.E.,</small></h2>
+      <svg class="knot" data-art="knot" viewBox="0 0 200 36" aria-hidden="true"></svg>
+      <h2 class="name wipe">M. Abbrinna <small>B.E.,</small></h2>
+      <p class="parents reveal">D/o Mr. M. Mohamed Ali &amp; Mrs. K. Saluja Banu</p>
+    </div>
+
+    <!-- Tamil -->
+    <div class="ta">
+      <p class="lead reveal">அன்புடையீர்,</p>
+      <p class="body reveal">நிகழும் மங்களகரமான ஸ்ரீ பராபவ வருடம் கார்த்திகை மாதம் 06-ம் நாள் (22.11.2026) ஞாயிற்றுக்கிழமை திரயோதசி திதியும், அசுபதி நட்சத்திரமும் சித்தயோகமும் கூடிய சுபயோக சுபதினத்தில் காலை 10.00 மணிக்குமேல் 11.00 மணிக்குள் அமைந்த சுபவேளையில்</p>
+
+      <p class="family reveal">கோயம்புத்தூர், தெய்வத்திருவாளர்கள். T.J. ராமாச்சாரி – சாரதாம்பாள் அவர்களின் மகன் வழிப்பேரனும், தெய்வத்திருவாளர்கள். S.P. ராமசாமி பிள்ளை – ராஜலட்சுமி அவர்களின் மகள் வழிப்பேரனும், திரு. R. ரவி – தெய்வத்திருமதி. கோமளா ரவி அவர்களின் புதல்வனுமாகிய</p>
+      <p class="honor reveal">திருவளர்ச்செல்வன்</p>
+      <h2 class="name name--ta wipe">R. கிஷோர் <small>B.E.,</small></h2>
+
+      <svg class="knot" data-art="knot" viewBox="0 0 200 36" aria-hidden="true"></svg>
+
+      <p class="family reveal">ஹாஜி. மொஹிதீன் பிச்சை மற்றும் (லேட்) A. காசிம் அவர்களின் பேத்தியும், கோவை, சிங்கநல்லூர், திரு. M. முகம்மது அலி – திருமதி. K. சலுஜா பானு அவர்களின் புதல்வியுமாகிய</p>
+      <p class="honor reveal">திருவளர்ச்செல்வி</p>
+      <h2 class="name name--ta wipe">M. அப்ரின்னா <small>B.E.,</small></h2>
+
+      <p class="body reveal">ஆகியோரின் திருமணம் பெரியோர்களால் நிச்சயிக்கப்பட்டு, மேற்படி சுபமுகூர்த்தம், கோவை, திருச்சி ரோட்டில் அமைந்துள்ள <b>AKA கல்யாண மண்டபம்</b> நடைபெற உள்ளதால் தாங்கள் தங்கள் சுற்றமும் நட்பும் சூழ வருகை தந்து மணமக்களை வாழ்த்தியருள அன்புடன் அழைக்கின்றோம்.</p>
+    </div>
+  </section>
+
+  <!-- 4. Save the date (pinned, scroll-scrubbed) -->
+  <section class="scene s-date" id="date">
+    <div class="date__wrap">
+      <svg class="swirl" data-art="swirl" viewBox="0 0 300 120" aria-hidden="true"></svg>
+      <p class="save">
+        <span class="en">Save the Date</span>
+        <span class="ta">சுபமுகூர்த்தம்</span>
+      </p>
+      <div class="date__arch">
+        <svg class="date__frame" data-art="archframe" viewBox="0 0 160 220" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <p class="date__day"><span class="en">Sunday</span><span class="ta">ஞாயிற்றுக்கிழமை</span></p>
+        <p class="date__num">22</p>
+        <p class="date__month"><span class="en">November 2026</span><span class="ta">நவம்பர் 2026</span></p>
+        <p class="date__tamil ta">கார்த்திகை 06</p>
+      </div>
+      <div class="date__time">
+        <span class="en">10.00 am – 11.00 am</span>
+        <span class="ta">காலை 10.00 – 11.00 மணி</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Events: a gold thread runs through both -->
+  <section class="scene s-events" id="events">
+    <h3 class="heading reveal"><span class="en">Join us for</span><span class="ta">நிகழ்ச்சிகள்</span></h3>
+    <div class="thread">
+      <svg class="thread__line" data-art="thread" viewBox="0 0 20 400" preserveAspectRatio="none" aria-hidden="true"></svg>
+
+      <article class="event">
+        <span class="event__node" aria-hidden="true"></span>
+        <p class="event__when"><span class="en">Saturday, 21 November 2026</span><span class="ta">21.11.2026, சனிக்கிழமை</span></p>
+        <h4 class="event__name"><span class="en">Reception</span><span class="ta">திருமண வரவேற்பு</span></h4>
+        <p class="event__time"><span class="en">6.00 pm – 10.00 pm</span><span class="ta">மாலை 6.00 மணிமுதல் 10.00 மணிவரை</span></p>
+        <p class="event__where"><span class="en">AKA Kalyana Mandapam</span><span class="ta">மண்டபத்தில் நடைபெறும்</span></p>
+        <a class="link" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Kishore%20%26%20Abbrinna%20%E2%80%93%20Reception&dates=20261121T123000Z/20261121T163000Z&location=AKA%20Kalyana%20Mandapam%2C%20Trichy%20Road%2C%20Coimbatore"><span class="en">Add to calendar</span><span class="ta">காலெண்டரில் சேர்</span></a>
+      </article>
+
+      <article class="event">
+        <span class="event__node" aria-hidden="true"></span>
+        <p class="event__when"><span class="en">Sunday, 22 November 2026</span><span class="ta">22.11.2026, ஞாயிற்றுக்கிழமை</span></p>
+        <h4 class="event__name"><span class="en">Wedding</span><span class="ta">திருமணம்</span></h4>
+        <p class="event__time"><span class="en">Muhurtham, 10.00 am – 11.00 am</span><span class="ta">சுபமுகூர்த்தம், காலை 10.00 – 11.00 மணி</span></p>
+        <p class="event__where"><span class="en">AKA Kalyana Mandapam</span><span class="ta">AKA கல்யாண மண்டபம்</span></p>
+        <a class="link" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Kishore%20%26%20Abbrinna%20%E2%80%93%20Wedding&dates=20261122T043000Z/20261122T053000Z&location=AKA%20Kalyana%20Mandapam%2C%20Trichy%20Road%2C%20Coimbatore"><span class="en">Add to calendar</span><span class="ta">காலெண்டரில் சேர்</span></a>
+      </article>
+    </div>
+  </section>
+
+  <!-- 6. Countdown -->
+  <section class="scene s-count" id="count">
+    <h3 class="heading reveal"><span class="en">Until the muhurtham</span><span class="ta">சுபமுகூர்த்தத்திற்கு இன்னும்</span></h3>
+    <div class="count" id="countdown" aria-live="off">
+      <div class="count__cell"><svg data-art="cellarch" viewBox="0 0 64 84" aria-hidden="true"></svg><b data-unit="d">00</b><span class="en">days</span><span class="ta">நாட்கள்</span></div>
+      <div class="count__cell"><svg data-art="cellarch" viewBox="0 0 64 84" aria-hidden="true"></svg><b data-unit="h">00</b><span class="en">hours</span><span class="ta">மணி</span></div>
+      <div class="count__cell"><svg data-art="cellarch" viewBox="0 0 64 84" aria-hidden="true"></svg><b data-unit="m">00</b><span class="en">minutes</span><span class="ta">நிமிடம்</span></div>
+      <div class="count__cell"><svg data-art="cellarch" viewBox="0 0 64 84" aria-hidden="true"></svg><b data-unit="s">00</b><span class="en">seconds</span><span class="ta">விநாடி</span></div>
+    </div>
+    <p class="count__done" id="countDone" hidden><span class="en">Just married. Thank you for your blessings.</span><span class="ta">திருமணம் இனிதே நிறைவுற்றது. தங்கள் ஆசிகளுக்கு நன்றி.</span></p>
+  </section>
+
+  <!-- 7. Venue -->
+  <section class="scene s-venue" id="venue">
+    <h3 class="heading reveal"><span class="en">Venue</span><span class="ta">மண்டபம்</span></h3>
+    <div class="venue__arch">
+      <iframe class="venue__map" title="Map to AKA Kalyana Mandapam" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q=AKA%20Kalyana%20Mandapam%2C%20Trichy%20Road%2C%20Coimbatore&z=15&output=embed"></iframe>
+      <svg class="venue__frame" data-art="venueframe" viewBox="0 0 120 160" preserveAspectRatio="none" aria-hidden="true"></svg>
+    </div>
+    <p class="venue__name reveal"><span class="en">AKA Kalyana Mandapam</span><span class="ta">AKA கல்யாண மண்டபம்</span></p>
+    <p class="venue__addr reveal"><span class="en">Trichy Road, Coimbatore</span><span class="ta">திருச்சி ரோடு, கோவை</span></p>
+    <a class="btn reveal" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=AKA%20Kalyana%20Mandapam%2C%20Trichy%20Road%2C%20Coimbatore">
+      <span class="en">Get directions</span><span class="ta">வழியைப் பார்க்க</span>
+    </a>
+  </section>
+
+  <!-- 8. RSVP over WhatsApp -->
+  <section class="scene s-rsvp" id="rsvp">
+    <h3 class="heading reveal"><span class="en">Will you join us?</span><span class="ta">தங்கள் வருகையைத் தெரிவியுங்கள்</span></h3>
+    <form class="rsvp reveal" id="rsvpForm" novalidate>
+      <label class="field">
+        <span class="field__label"><span class="en">Your name</span><span class="ta">உங்கள் பெயர்</span></span>
+        <input type="text" name="name" autocomplete="name" required>
+      </label>
+      <fieldset class="field">
+        <legend class="field__label"><span class="en">Attending</span><span class="ta">கலந்து கொள்வது</span></legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="event" value="both" checked><span><span class="en">Both</span><span class="ta">இரண்டும்</span></span></label>
+          <label class="chip"><input type="radio" name="event" value="reception"><span><span class="en">Reception</span><span class="ta">வரவேற்பு</span></span></label>
+          <label class="chip"><input type="radio" name="event" value="wedding"><span><span class="en">Wedding</span><span class="ta">திருமணம்</span></span></label>
+        </div>
+      </fieldset>
+      <div class="field field--row">
+        <span class="field__label" id="guestsLabel"><span class="en">Guests</span><span class="ta">நபர்கள்</span></span>
+        <div class="stepper" role="group" aria-labelledby="guestsLabel">
+          <button type="button" data-step="-1" aria-label="Fewer guests">−</button>
+          <output name="guests" id="guests">2</output>
+          <button type="button" data-step="1" aria-label="More guests">+</button>
+        </div>
+      </div>
+      <label class="field">
+        <span class="field__label"><span class="en">Your wishes for the couple</span><span class="ta">மணமக்களுக்கு உங்கள் வாழ்த்து</span></span>
+        <textarea name="wish" rows="3"></textarea>
+      </label>
+      <p class="form__error" id="formError" hidden><span class="en">Add your name so the family knows who is coming.</span><span class="ta">யார் வருகிறார்கள் என்று தெரிய உங்கள் பெயரைச் சேர்க்கவும்.</span></p>
+      <button class="btn btn--solid" type="submit"><span class="en">Send on WhatsApp</span><span class="ta">WhatsApp-ல் அனுப்பு</span></button>
+    </form>
+  </section>
+
+  <!-- 9. Closing -->
+  <section class="scene s-close" id="close">
+    <svg class="thoranam thoranam--close" data-art="thoranam" viewBox="0 0 400 90" preserveAspectRatio="xMidYMin meet" aria-hidden="true"></svg>
+    <svg class="lamp" data-art="lamp" viewBox="0 0 120 220" aria-hidden="true"></svg>
+    <div class="en">
+      <p class="close__lead reveal">With best compliments from</p>
+      <p class="close__from reveal">R. Sharguru <small>B.E.,</small> and Relatives &amp; Friends</p>
+    </div>
+    <div class="ta">
+      <p class="close__lead reveal">தங்கள் அன்புள்ள</p>
+      <p class="close__from reveal">திரு. R. ரவி<br>தெய்வத்திருமதி. R. கோமளா<br>செல்வன். R. சற்குரு <small>B.E.,</small><br>கோவை.</p>
+    </div>
+    <a class="btn reveal" href="tel:+919092605807"><span class="en">Call 90926 05807</span><span class="ta">அழைக்க 90926 05807</span></a>
+    <p class="close__sign wipe">Kishore <span class="amp">&amp;</span> Abbrinna</p>
+    <p class="close__date reveal">22 . 11 . 2026</p>
+  </section>
+
+</main>
+
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script src="js/vendor/DrawSVGPlugin.min.js"></script>
+<script src="js/vendor/lenis.min.js"></script>
+<script src="js/monogram.js"></script>
+<script src="js/art.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
