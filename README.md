@@ -8,7 +8,7 @@ Mobile-first wedding invitation. Tap the wax seal, the doors open, and every sec
 index.html            all content (English + Tamil)
 css/style.css         colours, fonts, layout
 js/art.js             gold line-art (jasmine, lotus, thoranam, lamp, frames)
-js/main.js            card opening, scroll animations, countdown, RSVP
+js/main.js            card opening, scroll animations, calendar, countdown, RSVP
 js/monogram.js        K & A monogram outlines
 js/vendor/            GSAP, ScrollTrigger, DrawSVG, Lenis (offline copies)
 assets/fonts/         Playfair Display, Unbounded, Crimson Pro, Noto Serif Tamil

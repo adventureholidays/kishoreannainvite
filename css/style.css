@@ -5,6 +5,9 @@
 
 @font-face { font-family: "Playfair Display"; font-style: italic; font-weight: 500; src: url(../assets/fonts/playfair-display-latin-500-italic.woff2) format("woff2"); font-display: swap; }
 @font-face { font-family: "Playfair Display"; font-style: italic; font-weight: 600; src: url(../assets/fonts/playfair-display-latin-600-italic.woff2) format("woff2"); font-display: swap; }
+@font-face { font-family: "Cinzel Decorative"; font-weight: 400; src: url(../assets/fonts/cinzel-decorative-latin-400-normal.woff2) format("woff2"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-style: italic; font-weight: 800; src: url(../assets/fonts/montserrat-latin-800-italic.woff2) format("woff2"); font-display: swap; }
+@font-face { font-family: "Montserrat"; font-weight: 600; src: url(../assets/fonts/montserrat-latin-600-normal.woff2) format("woff2"); font-display: swap; }
 @font-face { font-family: "Unbounded"; font-weight: 600; src: url(../assets/fonts/unbounded-latin-600-normal.woff2) format("woff2"); font-display: swap; }
 @font-face { font-family: "Unbounded"; font-weight: 700; src: url(../assets/fonts/unbounded-latin-700-normal.woff2) format("woff2"); font-display: swap; }
 @font-face { font-family: "Crimson Pro"; font-weight: 400; src: url(../assets/fonts/crimson-pro-latin-400-normal.woff2) format("woff2"); font-display: swap; }
@@ -130,9 +133,15 @@ svg .thin  { stroke-width: .8; opacity: .8; }
 .seal--l { right: -56px; }
 .seal--r { left: -56px; }
 .seal__mark {
-  width: 72px; height: 88px; overflow: visible; fill: #E8EFE4;
+  width: 72px; height: 72px; overflow: visible; fill: #E8EFE4;
   filter: drop-shadow(0 1px 0 rgba(1,38,30,.6));
 }
+.seal__mark .fm path, .seal__mark .fm circle { stroke: #E8EFE4 !important; stroke-width: 4.2 !important; fill: none !important; }
+.seal__mark .fm { opacity: .5; } /* florals sit back so A and K stay the focus */
+.seal__mark .fm .h { display: none; } /* too fine to read at seal size */
+.seal__mark .fm .dot { fill: #E8EFE4 !important; stroke: none !important; }
+.seal__mark .fm .dust { display: none; } /* the wax keeps the florals as line art */
+.seal__mark .fm__letters { fill: #E8EFE4; }
 .seal-btn {
   position: absolute; top: 50%; left: 50%; width: 132px; height: 132px; margin: -66px 0 0 -66px;
   border-radius: 50%; border: 0; background: transparent; cursor: pointer; z-index: 3;
@@ -154,7 +163,7 @@ svg .thin  { stroke-width: .8; opacity: .8; }
 .thoranam .rope { stroke-width: 1.4; }
 
 .gate__hint {
-  position: absolute; left: 0; right: 0; top: calc(50% + 84px); z-index: 2;
+  position: absolute; left: 0; right: 0; top: calc(50% + 104px); z-index: 2;
   text-align: center; font-style: italic; font-size: 18px; color: var(--ink-soft);
 }
 html[data-lang="ta"] .gate__hint { font-style: normal; font-size: 14px; }
@@ -219,10 +228,6 @@ main {
 }
 
 /* 1. blessing */
-.pillaiyar {
-  font-family: var(--tamil); font-size: 40px; line-height: 1; color: var(--rose);
-  margin-bottom: 14px;
-}
 .thunai { display: flex; justify-content: space-between; gap: 18px; width: 100%; font-size: 16px; color: var(--ink-soft); }
 html[data-lang="ta"] .thunai { font-size: 13px; }
 .title {
@@ -247,9 +252,12 @@ html[data-lang="ta"] .scroll-cue { font-style: normal; font-size: 12px; }
 
 /* 2. monogram */
 .s-mono { padding-top: 90px; }
-.mono { width: 100%; max-width: 300px; overflow: visible; }
-.mono .glyph { fill: url(#monoFoil); }
-.mono__star { fill: var(--rose); }
+.mono { width: 100%; max-width: 340px; overflow: visible; }
+.fm path, .fm circle { fill: none; stroke: var(--gold); stroke-width: 1.05; stroke-linecap: round; stroke-linejoin: round; }
+.fm .h { stroke: var(--sage); stroke-width: .55; }
+.fm .dot { fill: var(--gold); stroke: none; }
+.fm__glyph { font-family: "Cinzel Decorative", "Playfair Display", serif; font-weight: 400; font-size: 200px; }
+.fm__outline .fm__glyph { fill: none; stroke: #B88A35; stroke-width: 1.1; stroke-linejoin: round; }
 .mono__cap { margin-top: 18px; font-family: var(--display); font-weight: 600; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
 html[data-lang="ta"] .mono__cap { font-family: var(--tamil); letter-spacing: 0; font-size: 15px; }
 
@@ -324,15 +332,22 @@ html[data-lang="ta"] .event__time, html[data-lang="ta"] .event__where { font-siz
 html[data-lang="ta"] .link { font-style: normal; font-size: 13px; }
 
 /* 6. countdown */
-.count { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%; }
+.count { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; width: 100%; }
 .count__cell {
-  position: relative; aspect-ratio: 64 / 84;
-  display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 14px;
+  position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px;
   font-size: 13px; font-style: italic; color: var(--ink-soft);
 }
 html[data-lang="ta"] .count__cell { font-style: normal; font-size: 10.5px; }
-.count__cell svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.count__cell b { font-family: var(--display); font-weight: 700; font-style: normal; font-size: 24px; line-height: 1.1; color: var(--rose); font-variant-numeric: tabular-nums; }
+.count__cell b {
+  display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 1;
+  border-radius: 14px; background: var(--rose); color: var(--paper);
+  font-family: var(--display); font-weight: 700; font-style: normal; font-size: 26px; line-height: 1; font-variant-numeric: tabular-nums;
+}
+.count__cell:not(:last-child)::after {
+  content: ""; position: absolute; left: calc(100% + 9px); top: calc((100% - 30px) / 2 - 8px);
+  width: 4px; height: 16px; transform: translateX(-50%);
+  background: radial-gradient(circle, var(--rose) 2px, transparent 2.5px) 0 0 / 4px 8px repeat-y;
+}
 .count__done { font-size: 20px; font-style: italic; margin-top: 20px; }
 
 /* 7. venue */
@@ -418,3 +433,103 @@ html[data-lang="ta"] .close__from { font-size: 16px; line-height: 1.9; }
 }
 
 .s-bless { padding-top: 96px; padding-bottom: 90px; }
+
+/* =========================================================
+   v5: couple's voice, calendar save-the-date, the call
+   ========================================================= */
+.gate__from { display: block; font-family: var(--script); font-style: italic; font-weight: 500; font-size: 22px; color: var(--rose); margin-bottom: 4px; }
+html[data-lang="ta"] .gate__from { font-family: var(--tamil); font-style: normal; font-weight: 600; font-size: 15px; }
+
+/* 1. opening vow */
+.vow { font-family: var(--script); font-style: italic; font-weight: 500; font-size: 30px; line-height: 1.3; color: var(--rose); max-width: 15ch; }
+.vow--1 { margin-top: 26px; }
+.vow--2 { color: var(--gold); }
+.s-bless .rule { margin: 26px 0; }
+html[data-lang="ta"] .vow { font-family: var(--tamil); font-style: normal; font-weight: 600; font-size: 20px; line-height: 1.8; max-width: 17em; }
+
+/* 3. invitation */
+.s-names { justify-content: center; }
+.invite__lead { font-style: italic; font-size: 21px; line-height: 1.45; color: var(--ink-soft); max-width: 22ch; }
+.invite__big {
+  font-family: var(--display); font-weight: 700; font-size: 30px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--rose); line-height: 1.15; margin: 2px 0;
+}
+.s-names .name { font-size: 52px; margin-top: 10px; }
+.s-names .knot { margin: 0; }
+html[data-lang="ta"] .invite__lead { font-style: normal; font-size: 15px; line-height: 1.9; max-width: 20em; }
+html[data-lang="ta"] .invite__big { font-family: var(--tamil); font-weight: 600; font-size: 24px; letter-spacing: 0; text-transform: none; }
+html[data-lang="ta"] .s-names .name--ta { font-size: 32px; }
+
+/* 4. calendar */
+.s-date { padding-top: 64px; padding-bottom: 40px; }
+.swirl { margin-bottom: -46px; }
+.cal { position: relative; width: 100%; max-width: 300px; margin-top: 22px; perspective: 900px; }
+.cal__rings { position: absolute; top: -9px; left: 0; right: 0; display: flex; justify-content: space-around; padding: 0 70px; z-index: 3; }
+.cal__rings i { width: 10px; height: 22px; border-radius: 6px; border: 2px solid var(--gold); background: var(--paper); }
+.cal__page {
+  position: relative; background: #F3F7F0; border: 1px solid rgba(91,127,32,.45); border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(1,38,30,.10); overflow: hidden; backface-visibility: hidden;
+}
+.cal__page--oct { position: absolute; inset: 0; z-index: 2; }
+.cal__page--oct .cal__day { color: rgba(1,38,30,.45); }
+.cal__head {
+  background: var(--rose); color: #E8EFE4; padding: 16px 0 12px;
+  font-family: var(--display); font-weight: 600; font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
+}
+html[data-lang="ta"] .cal__head { font-family: var(--tamil); letter-spacing: 0; font-size: 14px; }
+.cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px 0; padding: 10px 10px 12px; }
+.cal__wd { font-family: var(--display); font-weight: 600; font-size: 9px; letter-spacing: .08em; color: var(--gold); padding-bottom: 4px; }
+html[data-lang="ta"] .cal__wd { font-family: var(--tamil); font-size: 10px; letter-spacing: 0; }
+.cal__day { position: relative; display: grid; place-items: center; height: 32px; font-family: var(--serif); font-size: 16px; color: var(--ink); }
+.cal__n { position: relative; z-index: 1; }
+.cal__ring { position: absolute; left: 50%; top: 50%; width: 40px; height: 40px; margin: -20px 0 0 -20px; overflow: visible; z-index: 2; pointer-events: none; }
+.cal__ring path { fill: none; stroke-linecap: round; stroke-width: 1.6; }
+.is-rec .cal__ring path { stroke: var(--gold); }
+.is-wed .cal__ring path { stroke: var(--rose); stroke-width: 2; }
+.cal__fill { position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; background: var(--rose); }
+.is-wed .cal__n { font-weight: 700; }
+.is-wed .cal__ring { transform: rotate(-8deg) scale(1.08); }
+.cal__legend { display: flex; justify-content: center; gap: 22px; padding: 0 10px 14px; font-size: 15px; font-style: italic; color: var(--ink-soft); }
+html[data-lang="ta"] .cal__legend { font-style: normal; font-size: 12.5px; }
+.lg::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 7px; vertical-align: 1px; }
+.lg--rec::before { border: 1.5px solid var(--gold); }
+.lg--wed::before { background: var(--rose); }
+.cal__note { margin-top: 18px; font-size: 19px; font-weight: 500; line-height: 1.4; }
+html[data-lang="ta"] .cal__note { font-size: 14px; line-height: 1.9; }
+
+/* 5. timeline */
+.event__name { margin: 0 0 2px; }
+.event__when { font-style: normal; font-size: 18px; color: var(--ink); }
+.event__time { font-size: 18px; color: var(--ink-soft); }
+
+/* 7. venue */
+.venue__note { margin-top: 10px; font-size: 17px; font-style: italic; color: var(--ink); max-width: 24ch; }
+html[data-lang="ta"] .venue__note { font-style: normal; font-size: 13.5px; line-height: 1.9; max-width: 22em; }
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 22px; }
+.btn-row .btn { margin-top: 0; padding: 0 20px; }
+
+
+/* 9. closing */
+.s-close .close__lead { font-size: 20px; }
+.s-close .close__sign { margin-top: 2px; font-size: 40px; }
+html[data-lang="ta"] .s-close .close__sign { font-family: var(--tamil); font-style: normal; font-weight: 600; font-size: 24px; }
+.s-close .close__date { margin-top: 14px; }
+
+/* gate caption: sits in the gap between the seal ring and the vines below */
+.gate__pre { display: block; font-family: var(--script); font-style: italic; font-weight: 500; font-size: 18px; line-height: 1.2; letter-spacing: -.02em; color: var(--rose); }
+.gate__names { display: block; margin-top: 0; font-family: "Montserrat", var(--display); font-style: italic; font-weight: 800; font-size: 21px; letter-spacing: .02em; text-transform: uppercase; color: var(--ink); }
+.gate__tap { display: block; margin-top: 8px; font-style: italic; font-size: 14px; color: var(--ink-soft); }
+html[data-lang="ta"] .gate__pre { font-family: var(--tamil); font-style: normal; font-size: 13px; }
+html[data-lang="ta"] .gate__names { font-family: var(--tamil); font-weight: 600; font-size: 22px; letter-spacing: 0; text-transform: none; }
+html[data-lang="ta"] .gate__tap { font-style: normal; font-size: 12px; }
+
+/* per-letter text animation (letters are wrapped by js/main.js) */
+.w { display: inline-block; white-space: nowrap; }
+.ch { display: inline-block; will-change: transform, filter, opacity; }
+
+/* countdown inside closing scene */
+.count-wrap { width: 100%; margin-top: 26px; padding-bottom: 90px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.count-wrap .count__title { margin: 0; }
+.count-wrap { margin-top: 36px; gap: 14px; }
+.count-wrap .count__title { font-family: "Montserrat", var(--display); font-style: normal; font-weight: 600; font-size: 16px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); }
+html[data-lang="ta"] .count-wrap .count__title { font-family: var(--tamil); font-size: 15px; letter-spacing: .04em; }

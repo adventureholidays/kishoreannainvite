@@ -178,9 +178,10 @@
     },
 
     seal(svg) {
-      // the A & K monogram pressed into the wax, fully inked
-      window.MONO.parts.forEach(p => p.d.forEach(d => E('path', { d }, svg)));
-      E('path', { d: window.MONO.star }, svg);
+      // the same A / K and florals as the invitation monogram, pressed into the wax.
+      // The viewBox is centred on the letters (not the florals) so A and K sit in the middle of the seal.
+      FloralMono.build(svg);
+      svg.setAttribute('viewBox', '-6 77 400 400');
     },
 
     door(svg) {
@@ -198,31 +199,6 @@
     }
   };
 
-  /* ---------- monogram ----------
-     Each stroke is a filled shape revealed by a "pen" path in its mask,
-     so drawing the pen (DrawSVG) inks the letter in writing order.     */
-  function monogram(svg) {
-    const M = window.MONO;
-    svg.setAttribute('viewBox', M.viewBox);
-    const defs = E('defs', {}, svg);
-    const foil = E('linearGradient', {
-      id: 'monoFoil', gradientUnits: 'userSpaceOnUse', x1: 130, y1: 70, x2: 790, y2: 870,
-      gradientTransform: 'translate(-760 0)'
-    }, defs);
-    [[0, 'var(--gold)'], [0.44, 'var(--gold)'], [0.5, '#B2C5AA'], [0.56, 'var(--gold)'], [1, 'var(--gold)']]
-      .forEach(([o, c]) => E('stop', { offset: o, style: `stop-color:${c}` }, foil));
-
-    const pen = {};
-    M.parts.forEach((p, i) => {
-      const mask = E('mask', { id: `monoMask${i}`, maskUnits: 'userSpaceOnUse', x: 0, y: 0, width: 900, height: 900 }, defs);
-      pen[p.n] = E('path', { d: p.g, fill: 'none', stroke: '#fff', 'stroke-width': p.w }, mask);
-      const g = E('g', { class: 'glyph', mask: `url(#monoMask${i})` }, svg);
-      p.d.forEach(d => E('path', { d }, g));
-    });
-    const star = E('path', { d: M.star, class: 'mono__star' }, svg);
-    return { pen, star, foil };
-  }
-
   function render(root = document) {
     root.querySelectorAll('svg[data-art]').forEach(svg => {
       const fn = ART[svg.dataset.art];
@@ -230,5 +206,5 @@
     });
   }
 
-  window.Art = { render, monogram };
+  window.Art = { render };
 })();
