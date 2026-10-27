@@ -258,17 +258,21 @@
     err.hidden = true;
     const ev = form.event.value;
     const wish = form.wish.value.trim();
-    const label = {
-      en: { both: 'Reception & Wedding', reception: 'Reception (21 Nov)', wedding: 'Wedding (22 Nov)' },
-      ta: { both: 'வரவேற்பு & திருமணம்', reception: 'வரவேற்பு (21.11.2026)', wedding: 'திருமணம் (22.11.2026)' }
+    const event = {
+      en: { both: 'the Reception & Wedding', reception: 'the Reception (21 Nov)', wedding: 'the Wedding (22 Nov)' },
+      ta: { both: 'வரவேற்பு மற்றும் திருமண விழாவில்', reception: 'வரவேற்பு விழாவில் (21.11.2026)', wedding: 'திருமண விழாவில் (22.11.2026)' }
     }[lang][ev];
     const msg = lang === 'ta'
-      ? `வணக்கம் 🙏\nகிஷோர் & அப்ரின்னா திருமணத்தில் கலந்து கொள்வதை மகிழ்ச்சியுடன் உறுதி செய்கிறேன்.\n\n`
-        + `பெயர்: ${name}\nகலந்து கொள்வது: ${label}\nவருகை தரும் நபர்கள்: ${guests} (என்னையும் சேர்த்து)`
-        + (wish ? `\n\nவாழ்த்து: ${wish}` : '') + `\n\nவிழாவில் சந்திப்போம்!`
-      : `Hello 🙏\nHappy to confirm that we will be joining Kishore & Abbrinna's wedding celebrations.\n\n`
-        + `Name: ${name}\nAttending: ${label}\nNo. of members: ${guests} (including me)`
-        + (wish ? `\n\nWishes for the couple: ${wish}` : '') + `\n\nSee you there!`;
+      ? `கிஷோர்! 🎉\n\n`
+        + `*${name}* பேசுகிறேன். நீங்கள் புதிய வாழ்க்கையைத் தொடங்கும் இந்தத் தருணத்தை என்னால் தவறவிடவே முடியாது. நிச்சயம் வந்துவிடுவேன்.\n\n`
+        + (guests === 1 ? `${event} உங்களுடன் கொண்டாட நான் வருகிறேன். ✨` : `${event} உங்களுடன் கொண்டாட நாங்கள் *${guests}* பேர் வருகிறோம். ✨`) + `\n\n`
+        + (wish ? `${wish}\n\n` : '')
+        + `தயாராக இருங்கள், நாங்கள் வருகிறோம்! 💃🕺`
+      : `Kishore! 🎉\n\n`
+        + `*${name}* here. Watching you start this new chapter is something I truly can't miss. I'll be right there.\n\n`
+        + (guests === 1 ? `I'm coming for ${event} to celebrate with you. ✨` : `We're *${guests}* coming for ${event} to celebrate with you. ✨`) + `\n\n`
+        + (wish ? `${wish}\n\n` : '')
+        + `Get ready, we're coming! 💃🕺`;
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
   });
 })();
