@@ -1,21 +1,21 @@
 <!doctype html>
-<html lang="en" data-lang="en">
+<html lang="en" data-lang="en" class="is-cover">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#E8EFE4">
   <title>Kishore & Abbrinna | Wedding Invitation</title>
-  <meta name="description" content="For ten years, we've chosen each other every single day. Now, we choose each other for a lifetime. Kishore & Abbrinna, 21 & 22 November 2026, Coimbatore.">
+  <meta name="description" content="For twelve years, we've chosen each other every single day. Now, we choose each other for a lifetime. Kishore & Abbrinna, 21 & 22 November 2026, Coimbatore.">
 
   <!-- WhatsApp / social preview. After hosting, replace og:image with the full https:// link -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Kishore & Abbrinna | Wedding Invitation">
-  <meta property="og:description" content="For ten years, we've chosen each other every single day. Now, we choose each other for a lifetime. 21 & 22 November 2026, Coimbatore.">
+  <meta property="og:description" content="For twelve years, we've chosen each other every single day. Now, we choose each other for a lifetime. 21 & 22 November 2026, Coimbatore.">
   <meta property="og:image" content="assets/og-image.jpg">
 
   <link rel="preload" href="assets/fonts/playfair-display-latin-500-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/crimson-pro-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=17">
+  <link rel="stylesheet" href="css/style.css?v=25">
 </head>
 <body>
 
@@ -61,30 +61,43 @@
 <!-- ============ THE INVITATION ============ -->
 <main id="invite">
 
-  <!-- 1. Opening: one promise, in both voices -->
+  <!-- 1. Opening: one promise, in both voices, on a gilded card of its own (after References/Intro Section II.png) -->
   <section class="scene s-bless" id="bless">
-    <p class="vow vow--1">
-      <span class="en">For ten years, we've chosen each other, every single day.</span>
-      <span class="ta">பத்து ஆண்டுகளாக, ஒவ்வொரு நாளும் ஒருவரை ஒருவர் தேர்ந்தெடுத்தோம்.</span>
+    <div class="intro" aria-hidden="true">
+      <div class="intro__paper">
+        <svg class="intro__orn intro__drop" data-art="drop" viewBox="0 0 30 99"></svg>
+        <svg class="intro__orn intro__drop intro__drop--bot" data-art="dropup" viewBox="0 0 30 99"></svg>
+        <svg class="intro__orn intro__side intro__side--l" data-art="sidel" viewBox="0 0 30 200"></svg>
+        <svg class="intro__orn intro__side intro__side--r" data-art="sider" viewBox="0 0 30 260"></svg>
+      </div>
+    </div>
+    <p class="chapter">
+      <span class="en">Chapter XIII · Into Our Forever</span>
+      <span class="ta">அத்தியாயம் XIII · எங்கள் என்றென்றும் நோக்கி</span>
     </p>
-    <svg class="rule" data-art="rule" viewBox="0 0 240 20" aria-hidden="true"></svg>
+    <p class="vow vow--1">
+      <span class="en">For twelve years, we've chosen each other, every single day.</span>
+      <span class="ta">பன்னிரண்டு ஆண்டுகளாக, ஒவ்வொரு நாளும் ஒருவரை ஒருவர் தேர்ந்தெடுத்தோம்.</span>
+    </p>
+    <svg class="rule" data-art="rule" viewBox="0 0 240 24" aria-hidden="true"></svg>
     <p class="vow vow--2">
       <span class="en">Now, we choose each other for a lifetime.</span>
       <span class="ta">இனி, வாழ்நாள் முழுவதற்கும் ஒருவரை ஒருவர் தேர்ந்தெடுக்கிறோம்.</span>
     </p>
-    <div class="scroll-cue" aria-hidden="true">
-      <span class="en">Scroll</span><span class="ta">கீழே நகர்த்தவும்</span>
-      <i></i>
-    </div>
   </section>
 
   <!-- 2. Monogram (pinned, scroll-scrubbed) -->
   <section class="scene s-mono" id="mono">
-    <svg class="mono" id="monoSvg" viewBox="0 0 400 560" aria-label="A and K monogram" role="img"></svg>
+    <svg class="mono" id="monoSvg" viewBox="190 205 700 1055" aria-label="A and K monogram" role="img"></svg>
     <p class="mono__cap">
       <span class="en">Kishore &amp; Abbrinna</span>
       <span class="ta">கிஷோர் &amp; அப்ரின்னா</span>
     </p>
+    <svg class="mono__orn" id="monoOrn" viewBox="0 0 240 14" aria-hidden="true">
+      <path d="M0 7H100M140 7H240" class="mono__orn-l"/>
+      <circle cx="108" cy="7" r="1.8"/><circle cx="132" cy="7" r="1.8"/>
+      <path class="mono__orn-s" d="M120 0Q121.6 5.4 127 7Q121.6 8.6 120 14Q118.4 8.6 113 7Q118.4 5.4 120 0Z"/>
+    </svg>
   </section>
 
   <!-- 3. The invitation + names -->
@@ -127,9 +140,9 @@
     </div>
   </section>
 
-  <!-- 5. Timeline: two days, one promise -->
+  <!-- 5. Timeline: mark these two dates -->
   <section class="scene s-events" id="events">
-    <h3 class="heading reveal"><span class="en">Two days, one promise</span><span class="ta">இரண்டு நாள், ஒரே வாக்குறுதி</span></h3>
+    <h3 class="heading reveal"><span class="en">Mark these two dates</span><span class="ta">இந்த இரண்டு தேதிகளைக் குறித்துக்கொள்ளுங்கள்</span></h3>
     <div class="thread">
       <svg class="thread__line" data-art="thread" viewBox="0 0 20 400" preserveAspectRatio="none" aria-hidden="true"></svg>
 
@@ -209,11 +222,12 @@
   <!-- 9. Closing -->
   <section class="scene s-close" id="close">
     <svg class="thoranam thoranam--close" data-art="thoranam" viewBox="0 0 400 90" preserveAspectRatio="xMidYMin meet" aria-hidden="true"></svg>
-    <svg class="lamp" data-art="lamp" viewBox="0 0 120 220" aria-hidden="true"></svg>
+    <svg class="landscape" data-art="landscape" viewBox="0 0 400 340" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
     <p class="close__lead reveal"><span class="en">with love,</span><span class="ta">அன்புடன்,</span></p>
     <p class="close__sign wipe"><span class="en">Your Kishore <span class="amp">&amp;</span> Abbrinna</span><span class="ta">உங்கள் கிஷோர் &amp; அப்ரின்னா</span></p>
     <div class="count-wrap">
       <h3 class="heading count__title reveal"><span class="en">See you in</span><span class="ta">சந்திப்போம், இன்னும்</span></h3>
+      <svg class="count__rule" viewBox="0 0 160 14" aria-hidden="true"><path d="M0 7 H68 M92 7 H160" stroke="currentColor" stroke-width="1"/><path d="M80 0 Q81 6 87 7 Q81 8 80 14 Q79 8 73 7 Q79 6 80 0Z" fill="currentColor"/></svg>
       <div class="count" id="countdown" aria-live="off">
         <div class="count__cell"><b data-unit="d">00</b><span class="en">days</span><span class="ta">நாட்கள்</span></div>
         <div class="count__cell"><b data-unit="h">00</b><span class="en">hours</span><span class="ta">மணி</span></div>
@@ -231,7 +245,8 @@
 <script src="js/vendor/DrawSVGPlugin.min.js"></script>
 <script src="js/vendor/lenis.min.js"></script>
 <script src="js/floral-mono.js?v=5"></script>
-<script src="js/art.js?v=8"></script>
-<script src="js/main.js?v=14"></script>
+<script src="js/ak-mono.js?v=4"></script>
+<script src="js/art.js?v=16"></script>
+<script src="js/main.js?v=18"></script>
 </body>
 </html>

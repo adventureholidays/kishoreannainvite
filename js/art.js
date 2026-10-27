@@ -1,9 +1,9 @@
 /* ------------------------------------------------------------------
    Line-art generator
    Every ornament on the page (jasmine, lotus, mango-leaf thoranam,
-   kuthuvilakku, frames) is built here as SVG so GSAP can "draw" it.
+   frames) is built here as SVG so GSAP can "draw" it.
    Classes:  .ln = gold line   .pt = petal (line + paper fill)
-             .lf = leaf        .fl = flame   .mari = marigold
+             .lf = leaf        .mari = marigold
 ------------------------------------------------------------------- */
 (function () {
   const NS = 'http://www.w3.org/2000/svg';
@@ -18,12 +18,12 @@
     return E('g', { transform: `translate(${x} ${y}) rotate(${rot}) scale(${s})`, class: cls }, parent);
   }
 
+  let sealCount = 0;
   const PATH = {
     petal: 'M0 0 C-4.5 -5 -4 -13 0 -15.5 C4 -13 4.5 -5 0 0Z',
     bud: 'M0 0 C-2.6 -4 -2.2 -10 0 -13 C2.2 -10 2.6 -4 0 0Z',
     leaf: 'M0 0 C5 -5 14 -5.5 22 0 C14 5.5 5 5 0 0Z',
-    mango: 'M0 0 C6 9 6.5 30 0 46 C-6.5 30 -6 9 0 0Z',
-    flame: 'M0 0 C-4 -5 -3.5 -12 0 -19 C3.5 -12 4 -5 0 0Z'
+    mango: 'M0 0 C6 9 6.5 30 0 46 C-6.5 30 -6 9 0 0Z'
   };
 
   /* ---------- primitives ---------- */
@@ -81,8 +81,57 @@
     return stem;
   }
 
+  /* ---------- gilt pieces for the opening card (after References/Intro Section II.png) ---------- */
+  function giltDefs() { // gradients shared by every gilt piece on the page, made once
+    if (document.getElementById('giltFill')) return;
+    const svg = E('svg', { class: 'art-defs', width: 0, height: 0, 'aria-hidden': 'true' });
+    const defs = E('defs', {}, svg);
+    const grad = (tag, id, attrs, stops) => {
+      const g = E(tag, Object.assign({ id }, attrs), defs);
+      stops.forEach(([o, c]) => E('stop', { offset: o, 'stop-color': c }, g));
+    };
+    grad('linearGradient', 'giltFill', { x1: 0, y1: 0, x2: 1, y2: 1 }, [[0, '#F7E9B0'], [.45, '#D6B25A'], [1, '#9A7424']]);
+    grad('radialGradient', 'giltBead', { cx: .35, cy: .3, r: .75 }, [[0, '#FFF6CF'], [.5, '#D8B458'], [1, '#8E6A1C']]);
+    document.body.prepend(svg);
+  }
+
+  // four-point star: a gold rim around a bevelled face lit from the top left
+  function star(p, x, y, w, h) {
+    const g = G(p, x, y, 0, 1, 'gs');
+    const c = w * .2;
+    E('path', { d: `M0 ${-h} Q${c} ${-c} ${w} 0 Q${c} ${c} 0 ${h} Q${-c} ${c} ${-w} 0 Q${-c} ${-c} 0 ${-h}Z`, class: 'gs__rim' }, g);
+    const W = w * .6, H = h * .6, k = W * .2;
+    [`M0 0 L${-W} 0 Q${-k} ${-k} 0 ${-H}Z`, `M0 0 L0 ${-H} Q${k} ${-k} ${W} 0Z`, `M0 0 L0 ${H} Q${-k} ${k} ${-W} 0Z`, `M0 0 L${W} 0 Q${k} ${k} 0 ${H}Z`]
+      .forEach((d, i) => E('path', { d, class: 'gs__f' + i }, g));
+    return g;
+  }
+  const bead = (p, x, y, r) => E('circle', { cx: x, cy: y, r, class: 'gb' }, p);
+
+  // a vertical gold ornament on the centre line of a 30-wide viewBox: [b]ead, [l]ine, [s]tar
+  function strand(svg, parts) {
+    parts.forEach(([t, y, a, b]) => {
+      if (t === 'l') E('path', { d: `M15 ${y} V${a}`, class: 'gl gl--fine' }, svg);
+      else if (t === 'b') bead(svg, 15, y, a);
+      else star(svg, 15, y, a, b);
+    });
+  }
+  const DROP = [['b', 2, 1.9], ['b', 9.5, 1.4], ['l', 12.5, 27], ['s', 42.5, 11.3, 14.8], ['l', 58, 71],
+    ['b', 74, 1.4], ['b', 80, 1.7], ['b', 88, 1.9], ['b', 96.5, 1.4]];
+
   /* ---------- compositions ---------- */
   const ART = {
+    drop(svg) { strand(svg, DROP); },
+    dropup(svg) { strand(svg, DROP.map(([t, y, a, b]) => t === 'l' ? [t, 99 - a, 99 - y] : [t, 99 - y, a, b])); },
+    sidel(svg) {
+      strand(svg, [['b', 2, 1.6], ['b', 12, 1.2], ['l', 16, 81], ['s', 91, 6.5, 8.5], ['b', 104, 1.2], ['b', 111, 1.5],
+        ['b', 118, 1.2], ['l', 123, 189], ['b', 197, 1.6]]);
+    },
+    sider(svg) {
+      strand(svg, [['b', 2, 1.2], ['b', 8, 1.5], ['b', 14, 1.2], ['l', 18, 86], ['s', 97, 6.5, 8.5], ['b', 109, 1.2],
+        ['b', 115, 1.5], ['l', 120, 227], ['b', 233, 2.4], ['b', 241, 1.4], ['b', 248, 1.2], ['b', 255, 1]]);
+    },
+
+
     bloom(svg) {
       sprig(svg, 'M10 30 C55 8 120 6 206 30', { leaves: 7, flowers: [0.46, 0.8], buds: [0.99, 0.63], s: 1.05 });
       sprig(svg, 'M30 10 C8 55 6 120 30 206', { leaves: 7, flowers: [0.46, 0.8], buds: [0.99, 0.63], s: 1.05 });
@@ -97,10 +146,9 @@
     },
 
     rule(svg) {
-      E('path', { d: 'M8 10 L98 10 M142 10 L232 10', class: 'ln' }, svg);
-      E('circle', { cx: 104, cy: 10, r: 1.6, class: 'pt' }, svg);
-      E('circle', { cx: 136, cy: 10, r: 1.6, class: 'pt' }, svg);
-      jasmine(svg, 120, 10, 0.55, 0);
+      E('path', { d: 'M2 12 L98 12 M142 12 L238 12', class: 'gl gl--fine' }, svg);
+      bead(svg, 107, 12, 1.8); bead(svg, 133, 12, 1.8);
+      star(svg, 120, 12, 8.5, 10.5);
     },
 
     knot(svg) {
@@ -154,34 +202,69 @@
       }
     },
 
-    lamp(svg) {
-      const L = (d, c = 'ln') => E('path', { d, class: c }, svg);
-      L('M60 4 C55 12 55 20 60 25 C65 20 65 12 60 4Z', 'pt');
-      L('M57 25 L57 42 M63 25 L63 42');
-      E('ellipse', { cx: 60, cy: 46, rx: 16, ry: 4.5, class: 'pt' }, svg);
-      L('M57 51 L57 64 M63 51 L63 64');
-      L('M26 70 Q60 96 94 70');
-      E('ellipse', { cx: 60, cy: 70, rx: 34, ry: 6.5, class: 'pt' }, svg);
-      [28, 44, 60, 76, 92].forEach((x, i) => {
-        const g = G(svg, x, i === 2 ? 64 : 67, 0, 0.9, 'flame');
-        E('path', { d: PATH.flame, class: 'fl' }, g);
+    landscape(svg) {
+      // misty lake at sunrise (after References/Outro.png); its top and bottom edges are faded in CSS
+      const defs = E('defs', {}, svg);
+      const grad = (id, stops, attrs = { x1: 0, y1: 0, x2: 0, y2: 1 }) => {
+        const g = E('linearGradient', Object.assign({ id }, attrs), defs);
+        stops.forEach(([o, c, a = 1]) => E('stop', { offset: o, 'stop-color': c, 'stop-opacity': a }, g));
+      };
+      grad('lsSky', [[0, '#E9EFD6', 0], [.6, '#EEF1D4', .9], [1, '#F3F0CF']]);
+      grad('lsWater', [[0, '#E6EACB'], [1, '#D3DFC0']]);
+      grad('lsMist', [[0, '#EEF2DE', 0], [.6, '#EEF2DE', .85], [1, '#EEF2DE', 0]]);
+      const sun = E('radialGradient', { id: 'lsSun', cx: .5, cy: .55, r: .6 }, defs);
+      E('stop', { offset: 0, 'stop-color': '#FFFBE6' }, sun);
+      E('stop', { offset: 1, 'stop-color': '#F4ECBE' }, sun);
+
+      const art = E('g', {}, svg);
+      E('rect', { width: 400, height: 210, fill: 'url(#lsSky)' }, art);
+      E('circle', { cx: 196, cy: 150, r: 72, fill: 'url(#lsSun)', stroke: '#D7B661', 'stroke-width': .9 }, art);
+
+      // ridges, far to near: each lighter ridge sits in haze
+      const ridge = (d, fill, op) => E('path', { d, fill, opacity: op }, art);
+      ridge('M0 150 C40 132 70 140 100 128 C130 116 150 138 180 150 C210 162 230 156 260 146 C300 132 340 140 400 124 L400 220 L0 220Z', '#C3CFAE', .75);
+      ridge('M0 168 C30 150 60 142 92 154 C120 164 150 176 190 184 L260 182 C290 170 310 168 340 158 C365 150 385 156 400 162 L400 222 L0 222Z', '#A9BC94', .8);
+      E('rect', { y: 160, width: 400, height: 40, fill: 'url(#lsMist)' }, art);
+      ridge('M0 186 C40 176 80 180 120 194 C150 204 180 208 220 208 L400 204 L400 224 L0 224Z', '#93A97F', .75);
+      E('rect', { y: 186, width: 400, height: 34, fill: 'url(#lsMist)' }, art);
+
+      // lake with the sun's reflection
+      E('rect', { y: 210, width: 400, height: 130, fill: 'url(#lsWater)' }, art);
+      [[214, 34], [222, 28], [232, 40], [244, 30], [258, 46], [274, 34], [292, 52]].forEach(([y, w]) =>
+        E('path', { d: `M${196 - w} ${y} H${196 + w}`, stroke: '#F3E3A6', 'stroke-width': 1.6, 'stroke-linecap': 'round', opacity: .8 }, art));
+
+      // left shore: rocky slope with a stand of cypress
+      E('path', { d: 'M0 178 C30 182 70 196 110 214 C140 226 170 236 196 244 C150 250 90 256 0 262Z', fill: '#5F7C51' }, art);
+      E('path', { d: 'M0 214 C40 220 90 236 150 248 C100 256 50 262 0 266Z', fill: '#4A6741' }, art);
+      // right shore
+      E('path', { d: 'M236 230 C280 216 330 206 400 200 L400 246 C350 244 290 240 236 230Z', fill: '#6E8A5E' }, art);
+      const cypress = (x, y, s) => E('path', { d: `M${x} ${y} C${x - 6 * s} ${y - 12 * s} ${x - 5 * s} ${y - 34 * s} ${x} ${y - 52 * s} C${x + 5 * s} ${y - 34 * s} ${x + 6 * s} ${y - 12 * s} ${x} ${y}Z`, fill: '#2C4E2C' }, art);
+      [[14, 196, 1.3], [30, 194, 1.7], [46, 200, 1.4], [62, 206, 1.1], [78, 210, .9], [96, 218, .6]].forEach(t => cypress(...t));
+      [[300, 220, .7], [314, 214, 1], [328, 212, .8], [346, 208, 1.1], [362, 206, .9], [378, 205, .7]].forEach(t => cypress(...t));
+
+      // low mist over the water
+      E('rect', { y: 240, width: 400, height: 50, fill: 'url(#lsMist)' }, art);
+
+      // golden threads with beads sweeping across the scene
+      [['M-10 40 C60 60 110 130 170 168 S300 230 410 210', .9], ['M-10 70 C70 80 120 150 190 186 S320 240 410 226', .7], ['M-10 100 C80 110 140 176 210 204 S330 248 410 244', .55]].forEach(([d, op], i) => {
+        const p = E('path', { d, fill: 'none', stroke: '#C9A64A', 'stroke-width': 1, opacity: op, class: 'ls__thread' }, art);
+        const L = p.getTotalLength();
+        [.12, .22, .3, .7].forEach(f => {
+          const q = p.getPointAtLength((f + i * .04) * L);
+          E('circle', { cx: q.x, cy: q.y, r: 2, fill: '#C9A64A', opacity: op }, art);
+        });
       });
-      L('M56 88 C53 108 53 128 55 150 M64 88 C67 108 67 128 65 150');
-      E('ellipse', { cx: 60, cy: 104, rx: 9, ry: 3, class: 'pt' }, svg);
-      E('ellipse', { cx: 60, cy: 126, rx: 8, ry: 3, class: 'pt' }, svg);
-      E('ellipse', { cx: 60, cy: 154, rx: 14, ry: 4, class: 'pt' }, svg);
-      L('M47 156 Q43 174 26 190 M73 156 Q77 174 94 190');
-      E('ellipse', { cx: 60, cy: 192, rx: 36, ry: 7, class: 'pt' }, svg);
-      L('M22 194 L22 205 M98 194 L98 205');
-      L('M22 205 Q60 218 98 205');
-      jasmine(svg, 60, 178, 0.55, 0);
+
+      // birds
+      [[300, 70, 1], [334, 50, .85], [270, 92, .75]].forEach(([x, y, s]) =>
+        E('path', { d: `M${x - 10 * s} ${y + 2 * s} Q${x - 5 * s} ${y - 5 * s} ${x} ${y} Q${x + 5 * s} ${y - 5 * s} ${x + 10 * s} ${y + 2 * s}`, stroke: '#7A6A45', 'stroke-width': 1.6, fill: 'none', 'stroke-linecap': 'round' }, art));
     },
 
     seal(svg) {
-      // the same A / K and florals as the invitation monogram, pressed into the wax.
-      // The viewBox is centred on the letters (not the florals) so A and K sit in the middle of the seal.
-      FloralMono.build(svg);
-      svg.setAttribute('viewBox', '-6 77 400 400');
+      // the same A / K, axis, stars and arcs as the invitation monogram, pressed into the wax (flattened to one colour in CSS).
+      // The viewBox is centred on the letters so A and K sit in the middle of the seal; there are two seals, so ids differ.
+      AKMono.build(svg, `seal${sealCount++}`);
+      svg.setAttribute('viewBox', '175 380 760 760');
     },
 
     door(svg) {
@@ -200,6 +283,7 @@
   };
 
   function render(root = document) {
+    giltDefs();
     root.querySelectorAll('svg[data-art]').forEach(svg => {
       const fn = ART[svg.dataset.art];
       if (fn && !svg.childElementCount) fn(svg);

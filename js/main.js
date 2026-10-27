@@ -60,7 +60,7 @@
 
   /* ---------- draw all ornaments ---------- */
   Art.render();
-  const mono = FloralMono.build($('#monoSvg'), { animated: true });
+  const mono = AKMono.build($('#monoSvg'));
 
   /* ---------- per-letter text: every glyph blurs in and bounces up ---------- */
   const SPLIT = '.vow, .mono__cap, .save, .cal__note, .invite__lead, .invite__big, .name, .heading, '
@@ -145,8 +145,13 @@
   });
 
   /* ---------- hero states before the card opens ---------- */
-  const heroBits = ['.vow', '.rule', '.scroll-cue'];
-  if (!reduce) gsap.set(heroBits, { autoAlpha: 0 });
+  // the gilt ornaments of the opening card are drawn in, and its stars and beads pop into place
+  const heroBits = ['.vow', '.rule'];
+  if (!reduce) {
+    gsap.set([...heroBits, '.chapter'], { autoAlpha: 0 });
+    gsap.set('.intro .gl', { drawSVG: 0 });
+    gsap.set('.s-bless .gs, .s-bless .gb', { scale: 0, transformOrigin: '50% 50%' });
+  }
 
   function heroIntro() {
     const tl = gsap.timeline();
@@ -156,12 +161,26 @@
       .from('.arch__crown .ln', { drawSVG: '50% 50%', duration: 1 }, 0.2)
       .from('.arch__crown .lotus', { scale: 0, transformOrigin: '50% 100%', duration: 0.9, ease: 'back.out(1.6)' }, 0.5)
       .from('.bloom .lotus', { scale: 0, transformOrigin: '50% 100%', duration: 1, ease: 'back.out(1.6)' }, 0.8)
-      .from('.rule .ln', { drawSVG: '50% 50%', duration: 1 }, 1.9)
-      .from('.rule .flw', { scale: 0, transformOrigin: '50% 50%', duration: 0.6, ease: 'back.out(2)' }, 2.1)
-      .fromTo('.scroll-cue', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, 3.4);
+      .from('.bloom .flw:not(.lotus)', { scale: 0, rotation: '-=60', transformOrigin: '50% 50%', ease: 'back.out(2)', stagger: { each: 0.12 } }, 1)
+      .to('.intro__orn .gl', { drawSVG: '100%', duration: 1.2, ease: 'power2.out' }, 0.5)
+      .to('.chapter', { autoAlpha: 1, duration: 1.2, ease: 'power1.out' }, 0.3)
+      .to('.intro .gb', { scale: 1, duration: 0.5, ease: 'back.out(3)', stagger: { each: 0.03, from: 'random' } }, 0.7)
+      .to('.intro .gs', { scale: 1, duration: 0.9, ease: 'back.out(2)', stagger: 0.15 }, 0.9)
+      .from('.rule .gl', { drawSVG: '50% 50%', duration: 1 }, 1.9)
+      .to('.rule .gs, .rule .gb', { scale: 1, duration: 0.6, ease: 'back.out(2)' }, 2.1)
+      .call(() => gsap.to('.s-bless .gs', { scale: 0.82, opacity: 0.8, duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: 0.4 }));
     if (!reduce) { addLetters(tl, vowChars[0], 0.7, 0.35); addLetters(tl, vowChars[1], 2.3, 0.35); }
     return tl.timeScale(0.8); // slow, unhurried vows (~5.5s)
   }
+
+  /* ---------- the language pill sits inside the opening card, and tucks into the corner after it ---------- */
+  ScrollTrigger.create({
+    trigger: '#mono', start: 'top 85%',
+    onEnter: () => html.classList.remove('is-cover'),
+    onLeaveBack: () => html.classList.add('is-cover')
+  });
+  // the opening ornaments fade as it slides up out of the window
+  gsap.to('.intro', { autoAlpha: 0, ease: 'none', scrollTrigger: { trigger: '#bless', start: 'top top', end: 'bottom 35%', scrub: true } });
 
   /* ---------- the gate: tap the seal, doors swing open ---------- */
   const gate = $('#gate');
@@ -271,51 +290,32 @@
       return tl;
     }
 
-    // corner blooms open up as you read deeper into the card
-    $$('.bloom').forEach(svg => {
-      reveal(gsap.timeline().from($$('.flw:not(.lotus)', svg), {
-        scale: 0, rotation: '-=60', transformOrigin: '50% 50%', ease: 'back.out(2)',
-        stagger: { each: 0.25 }
-      }), '#invite', 'top 60%', 0);
-    });
-
-    // monogram: a pen traces A then K, ink rises up through them as the mark settles,
-    // then the bouquet blooms around them and a band of light glides across the letters
+    // monogram: the gold axis drops through the card and the two hairline arcs swing out from it, beads and stars
+    // pop into place, then A and K are inked on (gold edge first, green just behind) and a band of light glides over them
     const arrive = gsap.timeline();
     arrive
-      .fromTo(mono.mark, { scale: 1.08, y: 10 }, { scale: 1, y: 0, transformOrigin: '50% 50%', duration: 2.2, ease: 'expo.out' }, 0)
-      .set(mono.outline, { opacity: 1 }, 0)
-      .fromTo(mono.outlines, { attr: { 'stroke-dasharray': '0 1600' } },
-        { attr: { 'stroke-dasharray': '1600 0' }, duration: 1.2, ease: 'power1.inOut', stagger: 0.3 }, 0)
-      .addLabel('ink', 0.55)
-      .fromTo(mono.wipe, { attr: { y: 40 } }, { attr: { y: -600 }, duration: 1.1, ease: 'power2.inOut' }, 'ink')
-      .to(mono.outline, { opacity: 0, duration: 0.6, ease: 'power1.out' }, 1.4);
-    // the bouquet blooms: gold stems grow up from the base, each anemone unfurls from a closed bud
-    // (back petals first, then the ones cupping forward), its stamens burst open, buds swell,
-    // then the baby's-breath sprouts and gold dust settles
-    const B = mono.bloom, bloom = gsap.timeline();
-    bloom.from(B.stems, { drawSVG: 0, duration: 1.6, ease: 'power2.inOut', stagger: 0.12 }, 0);
-    B.flowers.forEach((fl, n) => {
-      const at = 0.8 + n * 0.55, o = `${fl.cx} ${fl.cy}`;
-      bloom
-        .from(fl.petals, { scale: 0.06, rotation: i => (i % 2 ? 24 : -24), svgOrigin: o, duration: 1.6, ease: 'back.out(1.3)', stagger: 0.1 }, at)
-        .from(fl.petals, { opacity: 0, duration: 0.4, ease: 'power1.out', stagger: 0.1 }, at)
-        .from(fl.filaments, { scale: 0, svgOrigin: o, duration: 1, ease: 'power3.out' }, at + 0.7)
-        .from(fl.anthers, { scale: 0, transformOrigin: '50% 50%', duration: 0.45, ease: 'back.out(3)', stagger: { each: 0.015, from: 'random' } }, at + 0.95);
+      .from(mono.lines, { drawSVG: 0, duration: 1.5, ease: 'power2.inOut', stagger: 0.07 }, 0)
+      .from(mono.arcs, { drawSVG: 0, duration: 1.8, ease: 'power1.inOut', stagger: 0.18 }, 0.3)
+      .from(mono.beads, { scale: 0, transformOrigin: '50% 50%', duration: 0.6, ease: 'back.out(3)', stagger: { each: 0.09, from: 'random' } }, 0.5)
+      .from(mono.stars.map(s => s.el), { scale: 0, rotation: -120, transformOrigin: '50% 50%', duration: 1, ease: 'back.out(2)', stagger: 0.25 }, 0.8)
+      .fromTo(mono.mark, { scale: 1.04, y: 8 }, { scale: 1, y: 0, svgOrigin: '540 760', duration: 3, ease: 'expo.out' }, 0.8);
+    [['A', 0.9], ['K', 0.9]].forEach(([L, at]) => {
+      arrive
+        .fromTo(mono.wipe(L, 'edge'), { attr: { r: 0 } }, { attr: { r: 700 }, duration: 1.5, ease: 'power2.inOut' }, at)
+        .fromTo(mono.wipe(L, 'ink'), { attr: { r: 0 } }, { attr: { r: 700 }, duration: 1.5, ease: 'power2.inOut' }, at + 0.25);
     });
-    B.buds.forEach((b, n) => {
-      bloom.from(b.el, { scale: 0, rotation: n % 2 ? 12 : -12, svgOrigin: b.origin, duration: 1.2, ease: 'back.out(1.6)' }, 1.5 + n * 0.3);
+    const shine = () => gsap.timeline().fromTo(mono.sheen, { attr: { x: 0 } }, { attr: { x: 950 }, duration: 1.4, ease: 'power2.inOut' });
+    arrive.add(shine(), 3.2);
+    arrive.fromTo('.mono__cap', { '--r': 0 }, { '--r': 1, duration: 1.2, ease: 'power2.out' }, 2.6);
+    arrive.add(fit(addLetters(gsap.timeline(), charsOf('.mono__cap'))), 2.7);
+    arrive.from('#monoOrn .mono__orn-l', { drawSVG: 0, duration: 0.9, ease: 'power2.out' }, 3.1)
+      .from('#monoOrn circle, #monoOrn .mono__orn-s', { scale: 0, transformOrigin: '50% 50%', duration: 0.6, ease: 'back.out(3)', stagger: 0.1 }, 3.3);
+    arrive.call(() => {
+      // idle: the stars breathe, the beads glimmer, and a quiet glint crosses the letters every few seconds
+      gsap.to(mono.stars.map(s => s.el), { scale: 0.78, opacity: 0.75, transformOrigin: '50% 50%', duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: { each: 0.5, from: 'start' } });
+      gsap.to(mono.beads, { opacity: 0.55, duration: 1.4, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: { each: 0.3, from: 'random' } });
+      gsap.timeline({ repeat: -1, repeatDelay: 6, delay: 4 }).add(shine());
     });
-    bloom
-      .from(B.sprigs.lines, { drawSVG: 0, duration: 0.9, ease: 'power1.out', stagger: { each: 0.05 } }, 1.8)
-      .from(B.sprigs.tips, { scale: 0, transformOrigin: '50% 50%', duration: 0.5, ease: 'back.out(2.5)', stagger: { each: 0.06, from: 'random' } }, 2.6)
-      .from(B.dust, { scale: 0, opacity: 0, transformOrigin: '50% 50%', duration: 0.6, ease: 'power2.out', stagger: { each: 0.04, from: 'random' } }, 3.2);
-    arrive.add(bloom, 'ink'); // the bouquet starts blooming as the ink begins to flood the letters
-    arrive.call(() => gsap.to(B.dust, { opacity: 0.25, duration: 1.6, ease: 'sine.inOut', stagger: { each: 0.35, from: 'random', repeat: -1, yoyo: true } })); // gold dust glimmers
-    const shine = () => gsap.timeline().fromTo(mono.sheen, { attr: { x: -300 } }, { attr: { x: 450 }, duration: 1.3, ease: 'power2.inOut' });
-    arrive.add(shine(), '>-0.3');
-    arrive.add(fit(addLetters(gsap.timeline(), charsOf('.mono__cap'))), '<0.4');
-    arrive.call(() => gsap.timeline({ repeat: -1, repeatDelay: 6, delay: 5 }).add(shine())); // a quiet glint every few seconds
     reveal(arrive, '#mono', 'top 75%', undefined, true);
 
     // text: each letter blurs in and bounces up as its line crosses the screen
@@ -394,13 +394,10 @@
       .from('.venue__frame .frame', { drawSVG: '50% 50%', duration: 1, ease: 'none' })
       .from('.venue__map', { autoAlpha: 0, scale: 0.94, duration: 0.8 }, 0.4), '.venue__arch', 'top 88%');
 
-    // closing: thoranam drops in, lamp is drawn, flames light
+    // closing: thoranam drops in
     reveal(gsap.timeline()
       .from('.thoranam--close .rope', { drawSVG: '50% 50%', duration: 0.6, ease: 'none' })
       .from('.thoranam--close .mango, .thoranam--close .mari', { y: -24, autoAlpha: 0, stagger: { each: 0.06, from: 'center' }, duration: 0.5 }, 0.2), '.thoranam--close', 'top 90%');
-    reveal(gsap.timeline()
-      .from('.lamp .ln, .lamp .pt', { drawSVG: 0, stagger: 0.05, duration: 0.6, ease: 'none' })
-      .from('.lamp .flame', { scale: 0, transformOrigin: '50% 100%', stagger: 0.08, duration: 0.4 }, '-=0.2'), '.lamp', 'top 88%');
 
     ScrollTrigger.refresh();
   }
